@@ -25,6 +25,7 @@ public class NearestNeighbour {
         int totalDistance = 0;
         Random random = new Random(randomSeed);
         int index = random.nextInt(TourManager.numberOfCities());
+//        int index = 0;
         int startIndex = index;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         //array use to check is a city is alredy visited

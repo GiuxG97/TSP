@@ -6,6 +6,7 @@ import TSP.Tour;
 import TSP.TourManager;
 import TSP.simulatedAnnealing.NearestNeighbour;
 import TSP.simulatedAnnealing.SimulatedAnnealing;
+import TSP.simulatedAnnealing.TwoOpt;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -57,7 +58,7 @@ public class Main extends Application {
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
-        InputStream inputFile = chooseResource("fl1577.tsp");
+        InputStream inputFile = chooseResource("eil76.tsp");
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
         List<String> lines = fileReader.readFile();
@@ -71,11 +72,20 @@ public class Main extends Application {
 
         NearestNeighbour nearestNeighbour = new NearestNeighbour(parser.getCities());
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
+
+        TwoOpt twoOpt = new TwoOpt(tourNearest);
+        Tour tourTwoOpt = twoOpt.computeAlgorithm();
+
+
         SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(10000, 0.001);
         simulatedAnnealing.setRandomSeed(20);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourNearest);
         timer.stopTimer();
+        System.out.println("Nearest neighbour");
         tourNearest.print();
+        System.out.println("Two-Opt after nearest neighbour");
+        tourTwoOpt.print();
+        System.out.println("Simulated annealing:");
         tourSimulatedAnnealing.print();
         System.out.println("Best distance: " + parser.getHeader().get(5));
         timer.printTimer();
