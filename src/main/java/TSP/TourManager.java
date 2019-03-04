@@ -6,6 +6,7 @@ public class TourManager {
     private static List<City> cities;
     private static int[][] distanceMatrix;
     private static TourManager tourManager;
+    private static int numberCities;
 
     public static TourManager getInstance(List<City> cities){
         if (tourManager == null){
@@ -16,15 +17,15 @@ public class TourManager {
 
     private TourManager(List<City> cities){
         TourManager.cities = cities;
-        distanceMatrix = new int[cities.size()][cities.size()];
+        numberCities = cities.size();
+        distanceMatrix = new int[numberCities][numberCities];
     }
 
     public void retriveDistance(){
         int distance = 0;
-        int citiesSize = cities.size();
         Coordinate city, distCity;
-        for (int i=0; i<citiesSize; i++){
-            for (int j=i; j<citiesSize; j++){
+        for (int i=0; i<numberCities; i++){
+            for (int j=i; j<numberCities; j++){
                 if (i != j){
                     city = cities.get(i).getCoordinate();
                     distCity = cities.get(j).getCoordinate();
@@ -45,7 +46,7 @@ public class TourManager {
         int size = distanceMatrix.length;
         for (int i=0; i<size; i++){
             for (int j=0; j<size; j++){
-                System.out.print(distanceMatrix[i][j] + " ");
+                System.out.print(distanceMatrix[i][j] + "\t");
             }
             System.out.println();
         }
@@ -60,6 +61,6 @@ public class TourManager {
     }
 
     public static int numberOfCities(){
-        return cities.size();
+        return numberCities;
     }
 }

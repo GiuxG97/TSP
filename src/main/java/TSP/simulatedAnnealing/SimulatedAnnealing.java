@@ -19,10 +19,10 @@ public class SimulatedAnnealing {
     public Tour computeAlgorithm(Tour currentTour){
         //bestTour point to the initialTour object
         Tour bestTour = new Tour(currentTour.getIndexCities());
-        bestTour.shuffle();
-        bestTour.setTotalDistance(bestTour.computeTotalDistance());
-        System.out.println("TOUR SHUFFLE!");
-        bestTour.print();
+//        bestTour.shuffle();
+//        bestTour.setTotalDistance(bestTour.computeTotalDistance());
+//        System.out.println("TOUR SHUFFLE!");
+//        bestTour.print();
         Random random = new Random(randomSeed);
         int numberCities = TourManager.numberOfCities();
         //this method only return the distance set after the nearest neighbour algorithm (not computed every time i call the method)
