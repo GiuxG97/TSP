@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="904728a3-f2f6-4ada-8e35-71e9cf894ea7" name="Default Changelist" comment="" />
+    <list default="true" id="904728a3-f2f6-4ada-8e35-71e9cf894ea7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TSP/Tour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TSP/Tour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TSP/TourManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TSP/TourManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/application/Main.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,7 +20,7 @@
     <session id="894656434">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="2" />
@@ -26,24 +32,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="6536" />
+          <entry key="java" value="6648" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6536" />
+          <entry key="JAVA" value="6648" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="12" />
-          <entry key="tsp" value="1" />
+          <entry key="java" value="13" />
+          <entry key="tsp" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="12" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="JAVA" value="13" />
+          <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -53,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/application/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+            <state relative-caret-position="368">
+              <caret line="33" column="93" lean-forward="true" selection-start-line="33" selection-start-column="93" selection-end-line="33" selection-end-column="93" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,11 +68,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/parser/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="43" selection-start-line="43" selection-end-line="43" />
+            <state relative-caret-position="378">
+              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -77,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/NearestNeighbour.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
+            <state relative-caret-position="386">
               <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -86,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/TSP/Tour.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="296">
+              <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#279#280#0" expanded="true" />
@@ -123,8 +141,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TSP/TourManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-324">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="288">
+              <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -137,6 +155,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -156,11 +177,11 @@
         <option value="$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/TwoOpt.java" />
         <option value="$PROJECT_DIR$/src/main/java/TSP/Timer.java" />
         <option value="$PROJECT_DIR$/src/main/java/parser/FileReader.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TSP/TourManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/application/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/NearestNeighbour.java" />
-        <option value="$PROJECT_DIR$/src/main/java/TSP/Tour.java" />
+        <option value="$PROJECT_DIR$/src/main/java/application/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/TSP/TourManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java" />
+        <option value="$PROJECT_DIR$/src/main/java/TSP/Tour.java" />
       </list>
     </option>
   </component>
@@ -201,6 +222,9 @@
     <option name="y" value="29" />
     <option name="width" value="960" />
     <option name="height" value="1051" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -283,7 +307,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551641782476" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551644057634" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -352,13 +376,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52053000" />
+    <option name="totallyTimeSpent" value="53666000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="29" width="1920" height="1051" extended-state="7" />
-    <editor active="true" />
+    <frame x="0" y="29" width="1920" height="1051" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.42997813" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.226254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -367,7 +390,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32930845" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33809" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3370044" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39956093" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -377,7 +400,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4994664" weight="0.32978722" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053364" side_tool="true" weight="0.32978722" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32821077" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.32819384" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -402,13 +425,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java</url>
-          <line>53</line>
+          <line>57</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java</url>
-          <line>113</line>
+          <line>117</line>
           <properties />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
@@ -470,16 +493,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/parser/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/parser/FileReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -508,23 +521,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/eil76.tsp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/application/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/NearestNeighbour.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="19" column="53" selection-start-line="19" selection-start-column="53" selection-end-line="19" selection-end-column="53" />
+        <state relative-caret-position="386">
+          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/NearestNeighbour.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/eil76.tsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
+        <state relative-caret-position="90">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/application/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="33" column="93" lean-forward="true" selection-start-line="33" selection-start-column="93" selection-end-line="33" selection-end-column="93" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/fl1577.tsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -533,31 +573,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TSP/TourManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="288">
+          <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TSP/Tour.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="296">
+          <caret line="50" column="41" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#279#280#0" expanded="true" />
             <element signature="e#338#339#0" expanded="true" />
             <element signature="e#1829#1830#0" expanded="true" />
             <element signature="e#1855#1856#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TSP/simulatedAnnealing/SimulatedAnnealing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

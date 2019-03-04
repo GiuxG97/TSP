@@ -28,8 +28,8 @@ public class TourManager {
                 if (i != j){
                     city = cities.get(i).getCoordinate();
                     distCity = cities.get(j).getCoordinate();
-                    distance = (int) Math.sqrt(Math.pow(city.getX() - distCity.getX(), 2) +
-                            Math.pow(city.getY() - distCity.getY(), 2));
+                    distance = (int) (Math.sqrt(Math.pow(city.getX() - distCity.getX(), 2) +
+                            Math.pow(city.getY() - distCity.getY(), 2))+0.5);
                     //the matrix is specular and the diagonal is the simmetrical axis
                     distanceMatrix[i][j] = distance;
                     distanceMatrix[j][i] = distance;

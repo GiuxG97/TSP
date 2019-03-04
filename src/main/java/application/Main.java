@@ -17,7 +17,7 @@ public class Main {
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
-        InputStream inputFile = chooseResource("eil76.tsp");
+        InputStream inputFile = chooseResource("fl1577.tsp");
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
         List<String> lines = fileReader.readFile();
@@ -31,12 +31,13 @@ public class Main {
 
         NearestNeighbour nearestNeighbour = new NearestNeighbour(parser.getCities());
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(10000, 0.002);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(Double.MAX_VALUE, 0.001);
         simulatedAnnealing.setRandomSeed(20);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourNearest);
         timer.stopTimer();
         tourNearest.print();
         tourSimulatedAnnealing.print();
+        System.out.println("Best distance: " + parser.getHeader().get(5));
         timer.printTimer();
 
     }
