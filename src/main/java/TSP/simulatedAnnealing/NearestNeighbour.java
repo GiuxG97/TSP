@@ -30,7 +30,7 @@ public class NearestNeighbour {
         //array use to check is a city is alredy visited
         int[] citiesVisited = new int[distanceMatrix.length];
         citiesVisited[startIndex] = -1;
-        tour.addIndexCities(index);
+        tour.addIndexCities(startIndex);
         int temp;
         for (int i = 0; i < distanceMatrix.length-1; i++) {
             int min = Integer.MAX_VALUE;
