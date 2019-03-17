@@ -10,11 +10,11 @@ public class Tour {
     private int totalDistance;
 
     public Tour(){
-        this.indexCities = new ArrayList<Integer>();
+        this.indexCities = new ArrayList<>();
     }
 
     public Tour(List<Integer> indexCities){
-        this.indexCities = new ArrayList<Integer>(indexCities);
+        this.indexCities = new ArrayList<>(indexCities);
     }
 
     public void addIndexCities(int index){

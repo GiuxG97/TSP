@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import parser.FileReader;
@@ -36,6 +37,11 @@ public class Main extends Application {
         List<Integer> indexCities = tour.getIndexCities();
         int size = indexCities.size();
         for (int i = 0; i < size - 1; i++) {
+            if(i==0) {
+                root.getChildren().add(new Circle(cities.get(indexCities.get(i)).getCoordinate().getX(), cities.get(indexCities.get(i)).getCoordinate().getY(), 5));
+                System.out.println("\n\n"+indexCities.get(i));
+            }
+                root.getChildren().add(new Circle(cities.get(indexCities.get(i)).getCoordinate().getX(), cities.get(indexCities.get(i)).getCoordinate().getY(), 3));
             line = new Line(cities.get(indexCities.get(i)).getCoordinate().getX(), cities.get(indexCities.get(i)).getCoordinate().getY(),
                     cities.get(indexCities.get(i + 1)).getCoordinate().getX(), cities.get(indexCities.get(i + 1)).getCoordinate().getY());
             root.getChildren().add(line);
@@ -58,13 +64,14 @@ public class Main extends Application {
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
-        InputStream inputFile = chooseResource("eil76.tsp");
+        InputStream inputFile = chooseResource("fl1577.tsp");
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
         List<String> lines = fileReader.readFile();
         Parser parser = new Parser(lines);
         parser.readHeader();
         parser.readCities();
+//        parser.printCities();
 
         TourManager tourManager = TourManager.getInstance(parser.getCities());
         tourManager.retriveDistance();
@@ -73,26 +80,31 @@ public class Main extends Application {
         NearestNeighbour nearestNeighbour = new NearestNeighbour(parser.getCities());
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
-        TwoOpt twoOpt = new TwoOpt(tourNearest);
-        Tour tourTwoOpt = twoOpt.computeAlgorithm();
+//        TwoOpt twoOpt = new TwoOpt(tourNearest);
+//        Tour tourTwoOpt = twoOpt.computeAlgorithm();
 
 
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(10000, 0.001);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(Double.MAX_VALUE, 0.001);
         simulatedAnnealing.setRandomSeed(20);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourNearest);
         timer.stopTimer();
         System.out.println("Nearest neighbour");
         tourNearest.print();
-        System.out.println("Two-Opt after nearest neighbour");
-        tourTwoOpt.print();
+//        System.out.println("Two-Opt after nearest neighbour");
+//        tourTwoOpt.print();
         System.out.println("Simulated annealing:");
-        tourSimulatedAnnealing.print();
-        System.out.println("Best distance: " + parser.getHeader().get(5));
+//        tourSimulatedAnnealing.print();
+        System.out.println("Best distance: " + parser.getBestKnown());
         timer.printTimer();
 
         cities = parser.getCities();
 //        tour = tourNearest;
+//        tour = tourTwoOpt;
         tour = tourSimulatedAnnealing;
+
+        double error = (double) (tourNearest.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
+        System.out.println("Error: " + error*100 + "%");
+
         launch(args);
 
     }

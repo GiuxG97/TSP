@@ -53,9 +53,9 @@ public class SimulatedAnnealing {
             int currentTourDistance = currentTour.computeTotalDistance();
             int neighbourTourDistance = neighbourTour.computeTotalDistance();
             //check if the neighbour tour should be accepted
-//            double P = acceptNeighbour(currentTourDistance, neighbourTourDistance);
-//            double randomRate = randomCompare();
-            if (acceptNeighbour(currentTourDistance, neighbourTourDistance) >= randomCompare())
+            double P = acceptNeighbour(currentTourDistance, neighbourTourDistance);
+            double randomRate = randomCompare(random);
+            if (P >= randomRate)
 //                currentTour = neighbourTour;
                 currentTour = new Tour(neighbourTour.getIndexCities());
 
@@ -159,9 +159,10 @@ public class SimulatedAnnealing {
         return Math.exp((currentDistance - neighbourDistance) / temperature);
     }
 
-    private double randomCompare(){
-        Random random = new Random(randomSeed);
+    private double randomCompare(Random random){
         //return random double between 0.0 and 1.0
+//        int n = random.nextInt(1000);
+//        double d = n / 1000.0;
         return random.nextInt(1000) / 1000.0;
     }
 

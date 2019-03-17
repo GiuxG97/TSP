@@ -23,25 +23,27 @@ public class NearestNeighbour {
     public Tour computeAlgorithm() {
         Tour tour = new Tour();
         int totalDistance = 0;
-        Random random = new Random(randomSeed);
-        int index = random.nextInt(TourManager.numberOfCities());
-//        int index = 0;
+//        Random random = new Random(randomSeed);
+//        int index = random.nextInt(TourManager.numberOfCities());
+        int index = 0;
         int startIndex = index;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         //array use to check is a city is alredy visited
         int[] citiesVisited = new int[distanceMatrix.length];
         citiesVisited[startIndex] = -1;
+
         tour.addIndexCities(startIndex);
-        int temp;
+        int temp, indexTemp = 0;
         for (int i = 0; i < distanceMatrix.length-1; i++) {
             int min = Integer.MAX_VALUE;
             for (int j = 0; j < distanceMatrix.length; j++) {
                 temp = distanceMatrix[index][j];
                 if (temp < min && temp != 0 && citiesVisited[j] != -1) {
                     min = temp;
-                    index = j;
+                    indexTemp = j;
                 }
             }
+            index = indexTemp;
             citiesVisited[index] = -1;
             tour.addIndexCities(index);
             totalDistance += min;

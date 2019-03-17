@@ -12,12 +12,12 @@ public class Parser {
     private List<String> fileLines;
     private List<String> header;
     private int index;
-    /*private String fileName;
+    private String fileName;
     private String fileType;
     private String fileComment;
     private String edgeWeightType;
     private int bestKnown;
-    private int dimension;*/
+    private int dimension;
 
     public Parser(List<String> lines){
         this.index = 0;
@@ -38,11 +38,18 @@ public class Parser {
     }
 
     public void readHeader(){
-        String line;
-        while(!(line = fileLines.get(index)).equals("NODE_COORD_SECTION")){
-            header.add(line);
-            index++;
-        }
+        fileName = fileLines.get(0);
+        fileComment = fileLines.get(1).split(": ")[1];
+        fileType = fileLines.get(2).split(" ")[2];
+        dimension = Integer.parseInt(fileLines.get(3).split(" ")[2]);
+        edgeWeightType = fileLines.get(4).split(" ")[2];
+        bestKnown = Integer.parseInt(fileLines.get(5).split(" ")[2]);
+        index = 6;
+//
+//        while(!(line = fileLines.get(index)).equals("NODE_COORD_SECTION")){
+//            header.add(line);
+//            index++;
+//        }
     }
 
     public List<City> getCities() {
@@ -62,5 +69,36 @@ public class Parser {
         double x = Double.parseDouble(splitted[1]);
         double y = Double.parseDouble(splitted[2]);
         cities.add(new City(id, new Coordinate(x, y)));
+    }
+
+    public void printCities(){
+        int count = 0;
+        for (City c: cities){
+            System.out.println(++count + " --> " + c.getCoordinate().getX() + " " + c.getCoordinate().getY());
+        }
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public String getFileComment() {
+        return fileComment;
+    }
+
+    public String getEdgeWeightType() {
+        return edgeWeightType;
+    }
+
+    public int getBestKnown() {
+        return bestKnown;
+    }
+
+    public int getDimension() {
+        return dimension;
     }
 }
