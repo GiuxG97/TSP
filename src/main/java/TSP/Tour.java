@@ -56,7 +56,7 @@ public class Tour {
 
     public void print(){
         int size = indexCities.size();
-        System.out.println();
+//        System.out.println();
         System.out.print("TOUR: ");
         for (int i=0; i<size; i++) {
             if (i < size - 1)

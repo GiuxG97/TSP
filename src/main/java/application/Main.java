@@ -64,7 +64,7 @@ public class Main extends Application {
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
-        InputStream inputFile = chooseResource("fl1577.tsp");
+        InputStream inputFile = chooseResource("eil76.tsp");
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
         List<String> lines = fileReader.readFile();
@@ -93,7 +93,7 @@ public class Main extends Application {
 //        System.out.println("Two-Opt after nearest neighbour");
 //        tourTwoOpt.print();
         System.out.println("Simulated annealing:");
-//        tourSimulatedAnnealing.print();
+        tourSimulatedAnnealing.print();
         System.out.println("Best distance: " + parser.getBestKnown());
         timer.printTimer();
 
@@ -102,7 +102,7 @@ public class Main extends Application {
 //        tour = tourTwoOpt;
         tour = tourSimulatedAnnealing;
 
-        double error = (double) (tourNearest.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
+        double error = (double) (tour.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
         System.out.println("Error: " + error*100 + "%");
 
         launch(args);

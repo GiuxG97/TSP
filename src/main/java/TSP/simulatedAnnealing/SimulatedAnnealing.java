@@ -16,13 +16,14 @@ public class SimulatedAnnealing {
         this.randomSeed = 20;
     }
 
-    public Tour computeAlgorithm(Tour currentTour){
+    public Tour computeAlgorithm(Tour tour){
+        Tour currentTour = new Tour(tour.getIndexCities());
         //bestTour point to the initialTour object
+        currentTour.shuffle();
         Tour bestTour = new Tour(currentTour.getIndexCities());
-//        bestTour.shuffle();
-//        bestTour.setTotalDistance(bestTour.computeTotalDistance());
-//        System.out.println("TOUR SHUFFLE!");
-//        bestTour.print();
+        currentTour.setTotalDistance(currentTour.computeTotalDistance());
+        System.out.println("TOUR SHUFFLE!");
+        currentTour.print();
         Random random = new Random(randomSeed);
         int numberCities = TourManager.numberOfCities();
         //this method only return the distance set after the nearest neighbour algorithm (not computed every time i call the method)
@@ -55,14 +56,17 @@ public class SimulatedAnnealing {
             //check if the neighbour tour should be accepted
             double P = acceptNeighbour(currentTourDistance, neighbourTourDistance);
             double randomRate = randomCompare(random);
-            if (P >= randomRate)
+            if (randomRate < P) {
 //                currentTour = neighbourTour;
                 currentTour = new Tour(neighbourTour.getIndexCities());
-
+            }
+            else if (currentTour.computeTotalDistance() < bestTour.computeTotalDistance()){
+                currentTourDistance = currentTour.computeTotalDistance();
+                int bestTourDistance = bestTour.computeTotalDistance();
+                bestTour = new Tour(currentTour.getIndexCities());
+            }
 //            int currentDistance = currentTour.computeTotalDistance();
 //            int bestDistance = bestTour.computeTotalDistance();
-            if (currentTour.computeTotalDistance() < bestTour.computeTotalDistance())
-                bestTour = new Tour(currentTour.getIndexCities());
 
             temperature *= 1 - coolingRate;
             count++;
@@ -154,9 +158,10 @@ public class SimulatedAnnealing {
     }
 
     private double acceptNeighbour(int currentDistance, int neighbourDistance){
-        if (neighbourDistance < currentDistance)
-            return 1.0;
-        return Math.exp((currentDistance - neighbourDistance) / temperature);
+//        if (neighbourDistance < currentDistance)
+//            return 1.0;
+        double esp = (double)(currentDistance - neighbourDistance) / temperature;
+        return Math.exp(esp);
     }
 
     private double randomCompare(Random random){
