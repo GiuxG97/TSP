@@ -35,7 +35,7 @@ public class TwoOpt {
             }
             if (bestGain < 0)
                 tour = swapArcs(bestI, bestJ, size);
-            System.out.println(bestGain);
+//            System.out.println(bestGain);
 
         }
 

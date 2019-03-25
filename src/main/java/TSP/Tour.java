@@ -52,6 +52,7 @@ public class Tour {
 
     public int computeTotalDistance() {
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
+        totalDistance = 0;
         for (int i = 0; i < distanceMatrix.length; i++) {
             totalDistance += distanceMatrix[indexCities.get(i)][indexCities.get(i + 1)];
         }

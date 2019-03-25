@@ -84,23 +84,23 @@ public class Main extends Application {
         Tour tourTwoOpt = twoOpt.computeAlgorithm();
 
 
-//        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(Double.MAX_VALUE, 0.001);
-//        simulatedAnnealing.setRandomSeed(20);
-//        Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourNearest);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(Double.MAX_VALUE, 0.001);
+        simulatedAnnealing.setRandomSeed(20);
+        Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         timer.stopTimer();
         System.out.println("Nearest neighbour");
         tourNearest.print();
         System.out.println("Two-Opt after nearest neighbour");
         tourTwoOpt.print();
-//        System.out.println("Simulated annealing:");
-//        tourSimulatedAnnealing.print();
+        System.out.println("Simulated annealing:");
+        tourSimulatedAnnealing.print();
         System.out.println("Best distance: " + parser.getBestKnown());
         timer.printTimer();
 
         cities = parser.getCities();
 //        tour = tourNearest;
-        tour = tourTwoOpt;
-//        tour = tourSimulatedAnnealing;
+//        tour = tourTwoOpt;
+        tour = tourSimulatedAnnealing;
 
         double error = (double) (tour.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
         System.out.println("Error: " + error*100 + "%");
