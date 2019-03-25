@@ -40,10 +40,10 @@ public class Parser {
     public void readHeader(){
         fileName = fileLines.get(0);
         fileComment = fileLines.get(1).split(": ")[1];
-        fileType = fileLines.get(2).split(" ")[2];
-        dimension = Integer.parseInt(fileLines.get(3).split(" ")[2]);
-        edgeWeightType = fileLines.get(4).split(" ")[2];
-        bestKnown = Integer.parseInt(fileLines.get(5).split(" ")[2]);
+        fileType = fileLines.get(2).split(": ")[1];
+        dimension = Integer.parseInt(fileLines.get(3).split(": ")[1]);
+        edgeWeightType = fileLines.get(4).split(": ")[1];
+        bestKnown = Integer.parseInt(fileLines.get(5).split(": ")[1]);
         index = 6;
 //
 //        while(!(line = fileLines.get(index)).equals("NODE_COORD_SECTION")){

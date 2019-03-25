@@ -17,54 +17,43 @@ public class SimulatedAnnealing {
     }
 
     public Tour computeAlgorithm(Tour tour){
-        Tour currentTour = new Tour(tour.getIndexCities());
+        Tour currentTour = new Tour(tour);
         //bestTour point to the initialTour object
         currentTour.shuffle();
-        Tour bestTour = new Tour(currentTour.getIndexCities());
         currentTour.setTotalDistance(currentTour.computeTotalDistance());
+
+        Tour bestTour = new Tour(currentTour);
+//        currentTour.setTotalDistance(currentTour.computeTotalDistance());
         System.out.println("TOUR SHUFFLE!");
         currentTour.print();
         Random random = new Random(randomSeed);
-        int numberCities = TourManager.numberOfCities();
         //this method only return the distance set after the nearest neighbour algorithm (not computed every time i call the method)
         int totalDistance = bestTour.getTotalDistance();
         int count = 0;
         while (temperature > 0.5){
-            int randomIndex1 = 0, randomIndex2 = 0;
             //and also neighbourTour point to the initialTour object
 //            Tour neighbourTour = currentTour;
-            Tour neighbourTour = new Tour(currentTour.getIndexCities());
-            //create 2 different random index
-            while(randomIndex1 == randomIndex2){
-                randomIndex1 = random.nextInt(numberCities);
-                randomIndex2 = random.nextInt(numberCities);
-            }
-            //get the indexes of the 2 random cities
-            int indexCity1 = neighbourTour.get(randomIndex1);
-            int indexCity2 = neighbourTour.get(randomIndex2);
-
-//            int currentTourDistance = computePartialDistance(randomIndex1, randomIndex2, currentTour);
-
-            //swap these 2 cities to get the neighbour tour
-            neighbourTour.setIndexCities(randomIndex1, indexCity2);
-            neighbourTour.setIndexCities(randomIndex2, indexCity1);
-
+            Tour neighbourTour = computeNeighbour(currentTour, random);
 //            int neighbourTourDistance = computePartialDistance(randomIndex1, randomIndex2, neighbourTour);
 
-            int currentTourDistance = currentTour.computeTotalDistance();
-            int neighbourTourDistance = neighbourTour.computeTotalDistance();
+            int currentTourDistance = currentTour.getTotalDistance();
+            int neighbourTourDistance = neighbourTour.getTotalDistance();
             //check if the neighbour tour should be accepted
             double P = acceptNeighbour(currentTourDistance, neighbourTourDistance);
             double randomRate = randomCompare(random);
-            if (randomRate < P) {
+            if (neighbourTourDistance < currentTourDistance){
+                currentTour = new Tour(neighbourTour);
+                if (neighbourTourDistance < bestTour.getTotalDistance()){
+                    bestTour = new Tour(currentTour);
+                    System.err.println("Best: " + neighbourTourDistance);
+                }
+
+            }
+            else if (randomRate < P) {
 //                currentTour = neighbourTour;
-                currentTour = new Tour(neighbourTour.getIndexCities());
+                currentTour = new Tour(neighbourTour);
             }
-            else if (currentTour.computeTotalDistance() < bestTour.computeTotalDistance()){
-                currentTourDistance = currentTour.computeTotalDistance();
-                int bestTourDistance = bestTour.computeTotalDistance();
-                bestTour = new Tour(currentTour.getIndexCities());
-            }
+
 //            int currentDistance = currentTour.computeTotalDistance();
 //            int bestDistance = bestTour.computeTotalDistance();
 
@@ -72,8 +61,33 @@ public class SimulatedAnnealing {
             count++;
         }
         System.out.println("Conta: " + count);
-        bestTour.setTotalDistance(bestTour.computeTotalDistance());
         return bestTour;
+    }
+
+    private Tour computeNeighbour(Tour current, Random random){
+        int randomIndex1 = 0, randomIndex2 = 0;
+        //create 2 different random index
+        while(randomIndex1 == randomIndex2){
+            randomIndex1 = random.nextInt(TourManager.numberOfCities());
+            randomIndex2 = random.nextInt(TourManager.numberOfCities());
+        }
+
+        Tour neighbourTour = new Tour(current);
+        //get the indexes of the 2 random cities
+        int indexCity1 = neighbourTour.get(randomIndex1);
+        int indexCity2 = neighbourTour.get(randomIndex2);
+
+        //swap these 2 cities to get the neighbour tour
+        neighbourTour.setIndexCities(randomIndex1, indexCity2);
+        neighbourTour.setIndexCities(randomIndex2, indexCity1);
+
+        int [][] distanceMatrix = TourManager.getDistanceMatrix();
+        int totalDistance = 0;
+        for (int i=0; i<distanceMatrix.length; i++){
+            totalDistance += distanceMatrix[neighbourTour.get(i)][neighbourTour.get(i+1)];
+        }
+        neighbourTour.setTotalDistance(totalDistance);
+        return neighbourTour;
     }
 
     //too specific for the distance of the swap tour
@@ -158,8 +172,8 @@ public class SimulatedAnnealing {
     }
 
     private double acceptNeighbour(int currentDistance, int neighbourDistance){
-//        if (neighbourDistance < currentDistance)
-//            return 1.0;
+        if (neighbourDistance < currentDistance)
+            return 1.0;
         double esp = (double)(currentDistance - neighbourDistance) / temperature;
         return Math.exp(esp);
     }
@@ -168,7 +182,7 @@ public class SimulatedAnnealing {
         //return random double between 0.0 and 1.0
 //        int n = random.nextInt(1000);
 //        double d = n / 1000.0;
-        return random.nextInt(1000) / 1000.0;
+        return random.nextDouble();
     }
 
     public void setRandomSeed(long randomSeed) {
