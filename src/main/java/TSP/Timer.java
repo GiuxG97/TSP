@@ -12,7 +12,9 @@ public class Timer {
     }
 
     public void printTimer(){
-        System.out.println("Time elapsed: " + (this.stop - this.start) + "ms");
+        double sec = (double) (this.stop - this.start) / 1000.0;
+        double min = sec / 60.0;
+        System.out.println("Time elapsed: " + min + " min");
     }
 
 }

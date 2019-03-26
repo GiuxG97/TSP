@@ -7,6 +7,8 @@ public class TwoOpt {
 
     private Tour tour;
 
+    public TwoOpt(){}
+
     public TwoOpt(Tour initialTour) {
         this.tour = initialTour;
     }

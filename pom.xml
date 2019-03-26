@@ -15,7 +15,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>application.Main</mainClass>
+                            <mainClass>application.MainVecchiaGUI</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

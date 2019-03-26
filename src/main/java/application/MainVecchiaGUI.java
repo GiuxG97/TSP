@@ -18,10 +18,9 @@ import parser.FileReader;
 import parser.Parser;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends Application {
+public class MainVecchiaGUI extends Application {
 
     private static List<City> cities;
     private static Tour tour;
@@ -47,6 +46,10 @@ public class Main extends Application {
             root.getChildren().add(line);
         }
 
+        line = new Line(cities.get(indexCities.get(0)).getCoordinate().getX(), cities.get(indexCities.get(0)).getCoordinate().getY(),
+                cities.get(indexCities.get(cities.size()-1)).getCoordinate().getX(), cities.get(indexCities.get(cities.size()-1)).getCoordinate().getY());
+        root.getChildren().add(line);
+
         //Creating a Scene
         Scene scene = new Scene(new ScrollPane(root), 1000, 600);
 
@@ -64,7 +67,7 @@ public class Main extends Application {
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
-        InputStream inputFile = chooseResource("fl1577.tsp");
+        InputStream inputFile = chooseResource("kroA100.tsp");
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
         List<String> lines = fileReader.readFile();
@@ -72,19 +75,21 @@ public class Main extends Application {
         parser.readHeader();
         parser.readCities();
 //        parser.printCities();
+        cities = parser.getCities();
 
-        TourManager tourManager = TourManager.getInstance(parser.getCities());
+
+        TourManager tourManager = TourManager.getInstance(cities);
         tourManager.retriveDistance();
 //        tourManager.printDistanceMatrix();
 
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(parser.getCities());
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(cities);
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
         TwoOpt twoOpt = new TwoOpt(tourNearest);
         Tour tourTwoOpt = twoOpt.computeAlgorithm();
 
 
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(Double.MAX_VALUE, 0.001);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.01);
         simulatedAnnealing.setRandomSeed(20);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         timer.stopTimer();
@@ -97,7 +102,6 @@ public class Main extends Application {
         System.out.println("Best distance: " + parser.getBestKnown());
         timer.printTimer();
 
-        cities = parser.getCities();
 //        tour = tourNearest;
 //        tour = tourTwoOpt;
         tour = tourSimulatedAnnealing;
@@ -110,6 +114,6 @@ public class Main extends Application {
     }
 
     private static InputStream chooseResource(String name) {
-        return Main.class.getClassLoader().getResourceAsStream(name);
+        return MainVecchiaGUI.class.getClassLoader().getResourceAsStream(name);
     }
 }
