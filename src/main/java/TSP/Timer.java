@@ -14,7 +14,8 @@ public class Timer {
     public void printTimer(){
         double sec = (double) (this.stop - this.start) / 1000.0;
         double min = sec / 60.0;
-        System.out.println("Time elapsed: " + min + " min");
+        double rest = min - Math.floor(min);
+        System.out.println("Time elapsed: " + (int)Math.floor(min) + ":" + (int)Math.floor(rest*60));
     }
 
 }

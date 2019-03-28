@@ -10,7 +10,6 @@ public class Parser {
     //coordinates containes all the cities' coordinates, where the name is the index + 1
     private List<City> cities;
     private List<String> fileLines;
-    private List<String> header;
     private int index;
     private String fileName;
     private String fileType;
@@ -21,8 +20,7 @@ public class Parser {
 
     public Parser(List<String> lines){
         this.index = 0;
-        this.cities = new ArrayList<City>();
-        this.header = new ArrayList<String>();
+        this.cities = new ArrayList<>();
         this.fileLines = lines;
     }
 
@@ -60,14 +58,17 @@ public class Parser {
         this.fileLines = fileLines;
     }
 
-    public List<String> getHeader() {
-        return header;
-    }
-
     private void obtainCities(String line, int id){
         String[] splitted = line.split(" ");
-        double x = Double.parseDouble(splitted[1]);
-        double y = Double.parseDouble(splitted[2]);
+        double x, y;
+        if (splitted[0].equals("")){
+            x = Double.parseDouble(splitted[2]);
+            y = Double.parseDouble(splitted[3]);
+        }
+        else {
+            x = Double.parseDouble(splitted[1]);
+            y = Double.parseDouble(splitted[2]);
+        }
         cities.add(new City(id, new Coordinate(x, y)));
     }
 

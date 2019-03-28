@@ -85,8 +85,8 @@ public class MainVecchiaGUI extends Application {
         NearestNeighbour nearestNeighbour = new NearestNeighbour(cities);
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
-        TwoOpt twoOpt = new TwoOpt(tourNearest);
-        Tour tourTwoOpt = twoOpt.computeAlgorithm();
+        TwoOpt twoOpt = new TwoOpt();
+        Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest);
 
 
         SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.01);

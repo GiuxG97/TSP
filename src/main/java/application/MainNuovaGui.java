@@ -12,10 +12,8 @@ import javafx.scene.shape.Line;
 import parser.FileReader;
 import parser.Parser;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,10 +40,36 @@ public class MainNuovaGui {
     }
 
     public static void main(String[] args) {
+        double minError = Double.MAX_VALUE;
+        double error;
+        int minSeed = 0;
+        List<Double> minErrors = new ArrayList<>();
+        List<Integer> minSeeds = new ArrayList<>();
+        InputStream inputFile;
+        File[] files = getResourceFiles();
+        for (File f : files) {
+            for (int i = 0; i < 2; i++) {
+                inputFile = chooseResource(f.getName());
+                error = computeAlgorithms(i, inputFile);
+                if (error < minError) {
+                    minError = error;
+                    minSeed = i;
+                }
+            }
+            minErrors.add(minError);
+            minSeeds.add(minSeed);
+        }
+
+        print();
+
+
+    }
+
+
+    private static double computeAlgorithms(int seed, InputStream inputFile){
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
-        InputStream inputFile = chooseResource("fl1577.tsp");
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
         List<String> lines = fileReader.readFile();
@@ -54,20 +78,21 @@ public class MainNuovaGui {
         parser.readCities();
         cities = parser.getCities();
 
-
         TourManager tourManager = TourManager.getInstance(cities);
         tourManager.retriveDistance();
 
         NearestNeighbour nearestNeighbour = new NearestNeighbour(cities);
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
-        TwoOpt twoOpt = new TwoOpt(tourNearest);
-        Tour tourTwoOpt = twoOpt.computeAlgorithm();
+        TwoOpt twoOpt = new TwoOpt();
+        Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest);
 
-
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.01);
-        simulatedAnnealing.setRandomSeed(20);
+        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99);
+        simulatedAnnealing.setRandomSeed(seed);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
+        tour = tourSimulatedAnnealing;
+
         timer.stopTimer();
         System.out.println("Nearest neighbour");
         tourNearest.print();
@@ -75,22 +100,16 @@ public class MainNuovaGui {
         tourTwoOpt.print();
         System.out.println("Simulated annealing:");
         tourSimulatedAnnealing.print();
-        System.out.println("Best distance: " + parser.getBestKnown());
-        timer.printTimer();
-
-//        tour = tourNearest;
-//        tour = tourTwoOpt;
-        tour = tourSimulatedAnnealing;
 
         double error = (double) (tour.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
         System.out.println("Error: " + error*100 + "%");
 
-        print();
+        return error;
 
     }
 
     private static void print() {
-        FileWriter w = null;
+        FileWriter w;
         try {
             w = new FileWriter("nodes");
 
@@ -114,7 +133,11 @@ public class MainNuovaGui {
         }
     }
 
+    private static File[] getResourceFiles (){
+        return new File("/run/media/luca/Volume/Scuola/SUPSI/TERZO_ANNO/Secondo_Semestre/AlgoritmiAvanzati/Progetto/FilesToCompute").listFiles();
+    }
+
     private static InputStream chooseResource(String name) {
-        return MainVecchiaGUI.class.getClassLoader().getResourceAsStream(name);
+        return MainNuovaGui.class.getClassLoader().getResourceAsStream(name);
     }
 }
