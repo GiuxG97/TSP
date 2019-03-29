@@ -4,16 +4,13 @@ import TSP.City;
 import TSP.Tour;
 import TSP.TourManager;
 
-import java.util.List;
 import java.util.Random;
 
 public class NearestNeighbour {
 
     private long randomSeed;
 
-    public NearestNeighbour(List<City> cities) {
-        //if user doesn't specify a seed i assign it manually
-        this.randomSeed = 20;
+    public NearestNeighbour() {
     }
 
     public void setRandomSeed(long randomSeed) {
@@ -23,9 +20,9 @@ public class NearestNeighbour {
     public Tour computeAlgorithm() {
         Tour tour = new Tour();
         int totalDistance = 0;
-        Random random = new Random(randomSeed);
-        int index = random.nextInt(TourManager.numberOfCities());
-//        int index = 0;
+//        Random random = new Random(randomSeed);
+//        int index = random.nextInt(TourManager.numberOfCities());
+        int index = 0;
         int startIndex = index;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         //array use to check is a city is alredy visited

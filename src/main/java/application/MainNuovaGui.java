@@ -40,17 +40,20 @@ public class MainNuovaGui {
     }
 
     public static void main(String[] args) {
-        double minError = Double.MAX_VALUE;
         double error;
-        int minSeed = 0;
+        double minError;
+        int minSeed;
         List<Double> minErrors = new ArrayList<>();
         List<Integer> minSeeds = new ArrayList<>();
         InputStream inputFile;
         File[] files = getResourceFiles();
-        for (File f : files) {
-            for (int i = 0; i < 2; i++) {
-                inputFile = chooseResource(f.getName());
-                error = computeAlgorithms(i, inputFile);
+//        for (File f : files) {
+            minError = Double.MAX_VALUE;
+            minSeed = 0;
+//            System.err.println(f.getName());
+            for (int i = 0; i < 1; i++) {
+                inputFile = chooseResource("ch130.tsp");
+                error = computeAlgorithms(20, inputFile);
                 if (error < minError) {
                     minError = error;
                     minSeed = i;
@@ -58,7 +61,7 @@ public class MainNuovaGui {
             }
             minErrors.add(minError);
             minSeeds.add(minSeed);
-        }
+//        }
 
         print();
 
@@ -81,13 +84,16 @@ public class MainNuovaGui {
         TourManager tourManager = TourManager.getInstance(cities);
         tourManager.retriveDistance();
 
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(cities);
+        NearestNeighbour nearestNeighbour = new NearestNeighbour();
+        nearestNeighbour.setRandomSeed(seed);
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
         TwoOpt twoOpt = new TwoOpt();
         Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest);
 
-        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
+        double error1 = (double) (tourTwoOpt.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
+
+//        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
         SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99);
         simulatedAnnealing.setRandomSeed(seed);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
@@ -100,6 +106,7 @@ public class MainNuovaGui {
         tourTwoOpt.print();
         System.out.println("Simulated annealing:");
         tourSimulatedAnnealing.print();
+        System.out.println("Best distance: " + parser.getBestKnown());
 
         double error = (double) (tour.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
         System.out.println("Error: " + error*100 + "%");

@@ -82,7 +82,7 @@ public class MainVecchiaGUI extends Application {
         tourManager.retriveDistance();
 //        tourManager.printDistanceMatrix();
 
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(cities);
+        NearestNeighbour nearestNeighbour = new NearestNeighbour();
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
         TwoOpt twoOpt = new TwoOpt();

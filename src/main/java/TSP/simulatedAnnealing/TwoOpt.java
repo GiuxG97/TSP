@@ -18,10 +18,10 @@ public class TwoOpt {
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         while (bestGain < 0) {
             bestGain = Integer.MAX_VALUE;
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
-                    gain = computeDistance(tour, i, j, distanceMatrix);
-                    if (gain < bestGain && i != j) {
+            for (int i = 0; i < size-1; i++) {
+                for (int j = i+1; j < size-1; j++) {
+                    gain = computeDistance(i, j, distanceMatrix);
+                    if (gain < bestGain) {
                         bestGain = gain;
                         bestI = i;
                         bestJ = j;
@@ -54,46 +54,68 @@ public class TwoOpt {
         return tour;
     }
 
-    private int computeDistance(Tour tour, int index1, int index2, int[][] distanceMatrix) {
-        int nextI1, nextI2;
-        if (index1 == distanceMatrix.length)
-            nextI1 = 0;
-        else
-            nextI1 = index1+1;
-        if (index2 == distanceMatrix.length)
-            nextI2 = 0;
-        else
-            nextI2 = index2+1;
+    private int computeDistance(int index1, int index2, int[][] distanceMatrix) {
+//        int nextI1, nextI2;
+//        if (index1 == distanceMatrix.length)
+//            nextI1 = 0;
+//        else
+//            nextI1 = index1+1;
+//        if (index2 == distanceMatrix.length)
+//            nextI2 = 0;
+//        else
+//            nextI2 = index2+1;
 
-        return (distanceMatrix[tour.get(index1)][tour.get(index2)] + distanceMatrix[tour.get(nextI1)][tour.get(nextI2)]) -
-                (distanceMatrix[tour.get(index1)][tour.get(nextI1)] + distanceMatrix[tour.get(index2)][tour.get(nextI2)]);
+        return (distanceMatrix[tour.get(index1)][tour.get(index2)] + distanceMatrix[tour.get(index1+1)][tour.get(index2+1)]) -
+                (distanceMatrix[tour.get(index1)][tour.get(index1+1)] + distanceMatrix[tour.get(index2)][tour.get(index2+1)]);
     }
 
     private Tour swapArcs(int index1, int index2, int size, int[][] distanceMatrix) {
         Tour newTour = new Tour();
         int distance = 0;
         int index;
+        int conta = 0;
         for (int i=0; i<=index1; i++){
             index = tour.get(i);
             newTour.addIndexCities(index);
-            if (i>0)
-                distance += distanceMatrix[tour.get(i-1)][index];
+            if (i>0) {
+                distance += distanceMatrix[tour.get(i - 1)][index];
+                conta++;
+            }
         }
 
-        for (int i=index2; i>index1; i--) {
-            index = tour.get(i);
+        int var = 0;
+        for (int i=index1+1; i<=index2; i++) {
+            index = tour.get(index2 - var);
             newTour.addIndexCities(index);
-            if (i < index2)
-                distance += distanceMatrix[tour.get(i-1)][index];
+            if (i > index1+1) {
+                distance += distanceMatrix[tour.get(i - var - 1)][index];
+                conta++;
+            }
+            var++;
         }
 
         for (int i=index2+1; i<size; i++) {
             index = tour.get(i);
             newTour.addIndexCities(index);
-            if (i > index2+1)
-                distance += distanceMatrix[tour.get(i-1)][index];
+            if (i > index2+1) {
+                distance += distanceMatrix[tour.get(i - 1)][index];
+                conta++;
+            }
         }
 
+//        for (int i=index2; i>index1; i--) {
+//            index = tour.get(i);
+//            newTour.addIndexCities(index);
+//            if (i < index2)
+//                distance += distanceMatrix[tour.get(i-1)][index];
+//        }
+//
+//        for (int i=index2+1; i<size; i++) {
+//            index = tour.get(i);
+//            newTour.addIndexCities(index);
+//            if (i > index2+1)
+//                distance += distanceMatrix[tour.get(i-1)][index];
+//        }
         newTour.setTotalDistance(distance);
         return newTour;
     }

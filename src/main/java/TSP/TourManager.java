@@ -10,15 +10,15 @@ public class TourManager {
 
     public static TourManager getInstance(List<City> cities){
         if (tourManager == null){
-            tourManager = new TourManager(cities);
+            tourManager = new TourManager();
         }
+        tourManager.setCities(cities);
+        numberCities = cities.size();
+        distanceMatrix = new int[numberCities][numberCities];
         return tourManager;
     }
 
-    private TourManager(List<City> cities){
-        TourManager.cities = cities;
-        numberCities = cities.size();
-        distanceMatrix = new int[numberCities][numberCities];
+    private TourManager(){
     }
 
     public void retriveDistance(){
@@ -62,5 +62,9 @@ public class TourManager {
 
     public static int numberOfCities(){
         return numberCities;
+    }
+
+    private void setCities(List<City> cities) {
+        TourManager.cities = cities;
     }
 }

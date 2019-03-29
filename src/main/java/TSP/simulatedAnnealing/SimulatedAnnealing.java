@@ -15,7 +15,6 @@ public class SimulatedAnnealing {
     public SimulatedAnnealing(double temperature, double coolingRate) {
         this.temperature = temperature;
         this.coolingRate = coolingRate;
-        this.randomSeed = 10;
     }
 
     public Tour computeAlgorithm(Tour tour) {
@@ -72,12 +71,12 @@ public class SimulatedAnnealing {
         int bound = TourManager.numberOfCities() / 4;
         int min = bound;
         //create 4 different random index that are sorted from the smallest to the bigger
-        randomIndex1 = random.nextInt(bound);
+        randomIndex1 = random.nextInt(bound)+1;
         randomIndex2 = random.nextInt(bound * 2 - min) + min;
         min = bound * 2;
         randomIndex3 = random.nextInt(bound * 3 - min) + min;
         min = bound * 3;
-        randomIndex4 = random.nextInt(bound * 4 - min) + min;
+        randomIndex4 = random.nextInt(bound * 4 - min) + min-1;
 
         for (int i = 0; i <= randomIndex1; i++)
             neighbour.addIndexCities(current.get(i));
