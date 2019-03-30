@@ -10,7 +10,6 @@ public class SimulatedAnnealing {
     private double temperature;
     private double coolingRate;
     private Random random;
-    private Timer timer;
 
     public SimulatedAnnealing(double temperature, double coolingRate, long seed) {
         this.temperature = temperature;
@@ -18,8 +17,7 @@ public class SimulatedAnnealing {
         this.random = new Random(seed);
     }
 
-    public SimulatedAnnealing(Timer timer, long seed) {
-        this.timer = timer;
+    public SimulatedAnnealing(long seed) {
         this.random = new Random(seed);
     }
 
@@ -29,10 +27,10 @@ public class SimulatedAnnealing {
         Tour candidateTour;
         TwoOpt twoOpt = new TwoOpt();
 
-        while (timer.getElapsedTime() < Timer.ENDTIME) {
+        while (Timer.getElapsedTime() < Timer.ENDTIME) {
             Tour neighborTour = computeNeighbor(currentTour, random);
 
-            candidateTour = twoOpt.computeAlgorithm(neighborTour, timer);
+            candidateTour = twoOpt.computeAlgorithm(neighborTour);
             if (candidateTour.getTotalDistance() < currentTour.getTotalDistance()) {
                 currentTour = new Tour(candidateTour);
                 if (currentTour.getTotalDistance() < bestTour.getTotalDistance()) {
@@ -43,6 +41,7 @@ public class SimulatedAnnealing {
             }
 
         }
+        Timer.stopTimer();
         return bestTour;
     }
 

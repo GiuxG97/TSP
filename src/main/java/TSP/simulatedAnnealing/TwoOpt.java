@@ -11,14 +11,14 @@ public class TwoOpt {
     public TwoOpt() {
     }
 
-    public Tour computeAlgorithm(Tour initialTour, Timer timer) {
+    public Tour computeAlgorithm(Tour initialTour) {
         tour = new Tour(initialTour);
         int size = tour.size();
         int bestGain = -1;
         int gain;
         int bestI = 0, bestJ = 0;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
-        while (bestGain < 0 && timer.getElapsedTime() < Timer.ENDTIME) {
+        while (bestGain < 0 && Timer.getElapsedTime() < Timer.ENDTIME) {
             bestGain = Integer.MAX_VALUE;
             for (int i = 0; i < size; i++) {
                 for (int j = i+1; j < size; j++) {
@@ -34,6 +34,7 @@ public class TwoOpt {
                 tour = swapArcs(bestI, bestJ, size);
 
         }
+        Timer.stopTimer();
         tour.setTotalDistance(tour.computeTotalDistance());
         return tour;
     }

@@ -40,19 +40,19 @@ public class MainNuovaGui {
         String path = "/home/test/Scrivania/progetto/results/";
         Result result;
         while (true) {
-            for (int i = 0; i < filesName.length; i++) {
-                inputFile = chooseResource(filesName[i]);
+//            for (int i = 0; i < filesName.length; i++) {
+                inputFile = chooseResource("fl1577.tsp");
                 seed = System.currentTimeMillis();
                 result = computeAlgorithms(seed, inputFile);
                 try {
-                    if (checkResults((path+filesName[i]), result)) {
-                        printFile(result, (path+filesName[i]));
+                    if (checkResults((path+"fl1577.tsp"), result)) {
+                        printFile(result, (path+"fl1577.tsp"));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-            }
+//            }
         }
 
     }
@@ -76,8 +76,7 @@ public class MainNuovaGui {
     }
 
     private static Result computeAlgorithms(long seed, InputStream inputFile) {
-        Timer timer = new Timer();
-        timer.startTimer();
+        Timer.startTimer();
         FileReader fileReader = new FileReader();
         fileReader.setInputFile(inputFile);
         //read and save the lines in a list
@@ -94,15 +93,14 @@ public class MainNuovaGui {
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
         TwoOpt twoOpt = new TwoOpt();
-        Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest, timer);
+        Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest);
 
 //        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
 //        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99, seed);
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(timer, seed);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         tour = tourSimulatedAnnealing;
 
-        timer.stopTimer();
 //        System.out.println("Nearest neighbour");
 //        tourNearest.print();
 //        System.out.println("Two-Opt after nearest neighbour");
@@ -114,7 +112,7 @@ public class MainNuovaGui {
         double error = (double) (tour.getTotalDistance() - parser.getBestKnown()) / (double) parser.getBestKnown();
 //        System.out.println("Error: " + error * 100 + "%");
 
-        return new Result(error, timer.getElapsedTime(), seed);
+        return new Result(error, Timer.getElapsedTime(), seed);
 
     }
 
