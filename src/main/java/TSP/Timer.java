@@ -11,6 +11,10 @@ public class Timer {
         this.stop = System.currentTimeMillis();
     }
 
+    public long getElapsedTime(){
+        return this.stop - this.start;
+    }
+
     public void printTimer(){
         double sec = (double) (this.stop - this.start) / 1000.0;
         double min = sec / 60.0;
