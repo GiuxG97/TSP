@@ -46,13 +46,13 @@ public class MainNuovaGui {
         List<Double> minErrors = new ArrayList<>();
         List<Integer> minSeeds = new ArrayList<>();
         InputStream inputFile;
-        File[] files = getResourceFiles();
-//        for (File f : files) {
+        String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
+        for (String name : filesName) {
             minError = Double.MAX_VALUE;
             minSeed = 0;
 //            System.err.println(f.getName());
             for (int i = 0; i < 1; i++) {
-                inputFile = chooseResource("ch130.tsp");
+                inputFile = chooseResource(name);
                 error = computeAlgorithms(20, inputFile);
                 if (error < minError) {
                     minError = error;
@@ -61,7 +61,7 @@ public class MainNuovaGui {
             }
             minErrors.add(minError);
             minSeeds.add(minSeed);
-//        }
+        }
 
         print();
 
@@ -138,10 +138,6 @@ public class MainNuovaGui {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private static File[] getResourceFiles (){
-        return new File("/run/media/luca/Volume/Scuola/SUPSI/TERZO_ANNO/Secondo_Semestre/AlgoritmiAvanzati/Progetto/FilesToCompute").listFiles();
     }
 
     private static InputStream chooseResource(String name) {

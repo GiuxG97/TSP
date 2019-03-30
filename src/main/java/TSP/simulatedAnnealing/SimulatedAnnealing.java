@@ -1,5 +1,6 @@
 package TSP.simulatedAnnealing;
 
+import TSP.Timer;
 import TSP.Tour;
 import TSP.TourManager;
 
@@ -11,10 +12,15 @@ public class SimulatedAnnealing {
     private double temperature;
     private double coolingRate;
     private long randomSeed;
+    private Timer timer;
 
     public SimulatedAnnealing(double temperature, double coolingRate) {
         this.temperature = temperature;
         this.coolingRate = coolingRate;
+    }
+
+    public SimulatedAnnealing(Timer timer){
+        this.timer = timer;
     }
 
     public Tour computeAlgorithm(Tour tour) {
@@ -29,6 +35,7 @@ public class SimulatedAnnealing {
 //        int count = 0;
         Tour candidateTour;
         TwoOpt twoOpt = new TwoOpt();
+
         while (temperature > 0.5) {
             Tour neighborTour = computeNeighbor(currentTour, random);
 //            int neighbourTourDistance = computePartialDistance(randomIndex1, randomIndex2, neighbourTour);
