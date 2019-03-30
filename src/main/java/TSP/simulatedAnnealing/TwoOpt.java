@@ -19,8 +19,8 @@ public class TwoOpt {
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         while (bestGain < 0) {
             bestGain = Integer.MAX_VALUE;
-            for (int i = 0; i < size-1; i++) {
-                for (int j = i+1; j < size-1; j++) {
+            for (int i = 0; i < size; i++) {
+                for (int j = i+1; j < size; j++) {
                     gain = computeDistance(i, j, distanceMatrix);
                     if (gain < bestGain) {
                         bestGain = gain;
