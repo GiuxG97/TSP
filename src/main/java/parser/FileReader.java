@@ -47,16 +47,16 @@ public class FileReader {
 
     public Result readFileResult() throws FileNotFoundException {
         File file = new File(fileName);
+        if (!file.exists())
+            return new Result(Double.MAX_VALUE);
         Scanner sc = new Scanner(file);
-        Result result = new Result();
 
         List<String> lines = new ArrayList<>();
-        while (sc.hasNextLine())
+        while (sc.hasNextLine()) {
             lines.add(sc.nextLine());
+        }
 
-        result.setError(Double.parseDouble(lines.get(0)));
-        result.setSeed(Long.parseLong(lines.get(1)));
-        result.setTime(Long.parseLong(lines.get(2)));
-        return result;
+        return new Result(Double.parseDouble(lines.get(0)), Long.parseLong(lines.get(1)), Long.parseLong(lines.get(2)));
+
     }
 }

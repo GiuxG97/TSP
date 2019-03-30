@@ -37,6 +37,7 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
+        String path = "/home/test/Scrivania/progetto/results/";
         Result result;
         while (true) {
             for (int i = 0; i < filesName.length; i++) {
@@ -44,8 +45,8 @@ public class MainNuovaGui {
                 seed = System.currentTimeMillis();
                 result = computeAlgorithms(seed, inputFile);
                 try {
-                    if (checkResults(filesName[i], result)) {
-                        printFile(result, filesName[i]);
+                    if (checkResults((path+filesName[i]), result)) {
+                        printFile(result, (path+filesName[i]));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -65,7 +66,7 @@ public class MainNuovaGui {
     }
 
     private static boolean checkResults(String fileName, Result result) throws FileNotFoundException {
-        FileReader fileReader = new FileReader(fileName);
+        FileReader fileReader = new FileReader((fileName+".txt"));
         Result oldResult = fileReader.readFileResult();
         if (result.getError() < oldResult.getError())
             return true;
@@ -76,7 +77,6 @@ public class MainNuovaGui {
 
     private static Result computeAlgorithms(long seed, InputStream inputFile) {
         Timer timer = new Timer();
-        Result result = new Result();
         timer.startTimer();
         FileReader fileReader = new FileReader();
         fileReader.setInputFile(inputFile);
@@ -112,12 +112,8 @@ public class MainNuovaGui {
 
         double error = (double) (tour.getTotalDistance() - parser.getBestKnown()) / (double) parser.getBestKnown();
 //        System.out.println("Error: " + error * 100 + "%");
-        result.setError(error);
-        result.setSeed(seed);
-        result.setTime(timer.getElapsedTime());
 
-
-        return result;
+        return new Result(error, timer.getElapsedTime(), seed);
 
     }
 
