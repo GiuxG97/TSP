@@ -13,7 +13,6 @@ import parser.FileReader;
 import parser.Parser;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,16 +83,14 @@ public class MainNuovaGui {
         TourManager tourManager = TourManager.getInstance(cities);
         tourManager.retriveDistance();
 
-        NearestNeighbour nearestNeighbour = new NearestNeighbour();
-        nearestNeighbour.setRandomSeed(seed);
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(seed);
         Tour tourNearest = nearestNeighbour.computeAlgorithm();
 
         TwoOpt twoOpt = new TwoOpt();
         Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest);
 
 //        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99);
-        simulatedAnnealing.setRandomSeed(seed);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99, seed);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         tour = tourSimulatedAnnealing;
 

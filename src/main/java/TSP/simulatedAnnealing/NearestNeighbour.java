@@ -1,6 +1,5 @@
 package TSP.simulatedAnnealing;
 
-import TSP.City;
 import TSP.Tour;
 import TSP.TourManager;
 
@@ -8,19 +7,15 @@ import java.util.Random;
 
 public class NearestNeighbour {
 
-    private long randomSeed;
+    private Random random;
 
-    public NearestNeighbour() {
-    }
-
-    public void setRandomSeed(long randomSeed) {
-        this.randomSeed = randomSeed;
+    public NearestNeighbour(long seed) {
+        this.random = new Random(seed);
     }
 
     public Tour computeAlgorithm() {
         Tour tour = new Tour();
         int totalDistance = 0;
-        Random random = new Random(randomSeed);
         int index = random.nextInt(TourManager.numberOfCities());
         int startIndex = index;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();

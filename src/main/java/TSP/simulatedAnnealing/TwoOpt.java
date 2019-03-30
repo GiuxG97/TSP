@@ -38,19 +38,6 @@ public class TwoOpt {
     }
 
     private int computeDistance(int index1, int index2, int[][] distanceMatrix) {
-//        int nextI1, nextI2;
-//        if (index1 == distanceMatrix.length)
-//            nextI1 = 0;
-//        else
-//            nextI1 = index1+1;
-//        if (index2 == distanceMatrix.length)
-//            nextI2 = 0;
-//        else
-//            nextI2 = index2+1;
-//
-//        return (distanceMatrix[tour.get(index1)][tour.get(index2)] + distanceMatrix[tour.get(index1 + 1)][tour.get(index2 + 1)]) -
-//                (distanceMatrix[tour.get(index1)][tour.get(index1 + 1)] + distanceMatrix[tour.get(index2)][tour.get(index2 + 1)]);
-
         int nextI1, nextI2;
         if (index1 == distanceMatrix.length)
             nextI1 = 0;
@@ -81,31 +68,4 @@ public class TwoOpt {
         return newTour;
     }
 
-
-//    private boolean checkDistance(Tour tour, int index1, int index2) {
-//        int[][] distanceMatrix = TourManager.getDistanceMatrix();
-//        return (distanceMatrix[tour.get(index1 - 1)][tour.get(index1)] + distanceMatrix[tour.get(index2)][tour.get(index2 + 1)]) >
-//                (distanceMatrix[tour.get(index1 - 1)][tour.get(index2)] + distanceMatrix[tour.get(index1)][tour.get(index2 + 1)]);
-//    }
-//
-//    private void swapSegment(int i, int k, int size) {
-//
-//        // 1. take route[0] to route[i-1] and add them in order to new_route
-//        for (int c = 0; c <= i - 1; c++) {
-//            newTour.setIndexCities(c, tour.get(c));
-//        }
-//
-//        // 2. take route[i] to route[k] and add them in reverse order to new_route
-//        int dec = 1;
-//        for (int c = i; c <= k; c++) {
-//            newTour.setIndexCities(c, tour.get(k - dec));
-//            dec++;
-//        }
-//
-//        // 3. take route[k+1] to end and add them in order to new_route
-//        for (int c = k + 1; c < size; c++) {
-//            newTour.setIndexCities(c, tour.get(c));
-//        }
-//
-//    }
 }
