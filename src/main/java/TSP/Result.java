@@ -5,6 +5,16 @@ public class Result {
     private double error;
     private long seed;
 
+    public Result(double error){
+        this.error = error;
+    }
+
+    public Result(double error, long time, long seed){
+        this.error = error;
+        this.time = time;
+        this.seed = seed;
+    }
+
     public long getTime() {
         return time;
     }
