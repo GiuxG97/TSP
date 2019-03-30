@@ -8,14 +8,17 @@ public class Tour {
 
     private List<Integer> indexCities;
     private int totalDistance = 0;
+    private int[][] distanceMatrix;
 
     public Tour() {
         this.indexCities = new ArrayList<>();
+        this.distanceMatrix = TourManager.getDistanceMatrix();
     }
 
     public Tour(Tour other) {
         this(other.getIndexCities());
         this.totalDistance = other.totalDistance;
+        this.distanceMatrix = TourManager.getDistanceMatrix();
     }
 
     public Tour(List<Integer> indexCities) {
@@ -51,7 +54,6 @@ public class Tour {
     }
 
     public int computeTotalDistance() {
-        int[][] distanceMatrix = TourManager.getDistanceMatrix();
         totalDistance = 0;
         for (int i = 0; i < distanceMatrix.length; i++) {
             totalDistance += distanceMatrix[indexCities.get(i)][indexCities.get(i + 1)];

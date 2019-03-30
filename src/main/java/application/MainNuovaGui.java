@@ -53,7 +53,7 @@ public class MainNuovaGui {
 //            System.err.println(f.getName());
             for (int i = 0; i < 1; i++) {
                 inputFile = chooseResource(name);
-                error = computeAlgorithms(20, inputFile);
+                error = computeAlgorithms(System.currentTimeMillis(), inputFile);
                 if (error < minError) {
                     minError = error;
                     minSeed = i;
@@ -69,7 +69,7 @@ public class MainNuovaGui {
     }
 
 
-    private static double computeAlgorithms(int seed, InputStream inputFile){
+    private static double computeAlgorithms(long seed, InputStream inputFile){
         Timer timer = new Timer();
         timer.startTimer();
         FileReader fileReader = new FileReader();
@@ -90,8 +90,6 @@ public class MainNuovaGui {
 
         TwoOpt twoOpt = new TwoOpt();
         Tour tourTwoOpt = twoOpt.computeAlgorithm(tourNearest);
-
-        double error1 = (double) (tourTwoOpt.getTotalDistance() - parser.getBestKnown()) / (double)parser.getBestKnown();
 
 //        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
         SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99);

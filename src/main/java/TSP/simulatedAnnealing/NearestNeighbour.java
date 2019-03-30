@@ -20,9 +20,8 @@ public class NearestNeighbour {
     public Tour computeAlgorithm() {
         Tour tour = new Tour();
         int totalDistance = 0;
-//        Random random = new Random(randomSeed);
-//        int index = random.nextInt(TourManager.numberOfCities());
-        int index = 0;
+        Random random = new Random(randomSeed);
+        int index = random.nextInt(TourManager.numberOfCities());
         int startIndex = index;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         //array use to check is a city is alredy visited
