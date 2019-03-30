@@ -1,5 +1,6 @@
 package TSP.simulatedAnnealing;
 
+import TSP.Timer;
 import TSP.Tour;
 import TSP.TourManager;
 
@@ -10,14 +11,14 @@ public class TwoOpt {
     public TwoOpt() {
     }
 
-    public Tour computeAlgorithm(Tour initialTour) {
+    public Tour computeAlgorithm(Tour initialTour, Timer timer) {
         tour = new Tour(initialTour);
         int size = tour.size();
         int bestGain = -1;
         int gain;
         int bestI = 0, bestJ = 0;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
-        while (bestGain < 0) {
+        while (bestGain < 0 && timer.getElapsedTime() < Timer.ENDTIME) {
             bestGain = Integer.MAX_VALUE;
             for (int i = 0; i < size; i++) {
                 for (int j = i+1; j < size; j++) {

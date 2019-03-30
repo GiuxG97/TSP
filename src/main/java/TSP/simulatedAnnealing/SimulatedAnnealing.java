@@ -4,8 +4,6 @@ import TSP.Timer;
 import TSP.Tour;
 import TSP.TourManager;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class SimulatedAnnealing {
@@ -20,7 +18,7 @@ public class SimulatedAnnealing {
         this.random = new Random(seed);
     }
 
-    public SimulatedAnnealing(Timer timer, long seed){
+    public SimulatedAnnealing(Timer timer, long seed) {
         this.timer = timer;
         this.random = new Random(seed);
     }
@@ -31,11 +29,10 @@ public class SimulatedAnnealing {
         Tour candidateTour;
         TwoOpt twoOpt = new TwoOpt();
 
-        while (temperature > 0.5) {
+        while (timer.getElapsedTime() < Timer.ENDTIME) {
             Tour neighborTour = computeNeighbor(currentTour, random);
 
-            candidateTour = twoOpt.computeAlgorithm(neighborTour);
-
+            candidateTour = twoOpt.computeAlgorithm(neighborTour, timer);
             if (candidateTour.getTotalDistance() < currentTour.getTotalDistance()) {
                 currentTour = new Tour(candidateTour);
                 if (currentTour.getTotalDistance() < bestTour.getTotalDistance()) {
@@ -45,9 +42,7 @@ public class SimulatedAnnealing {
                 currentTour = new Tour(candidateTour);
             }
 
-            temperature *= coolingRate;
         }
-        bestTour = twoOpt.computeAlgorithm(bestTour);
         return bestTour;
     }
 
@@ -58,12 +53,12 @@ public class SimulatedAnnealing {
         int bound = TourManager.numberOfCities() / 4;
         int min = bound;
         //create 4 different random index that are sorted from the smallest to the bigger
-        randomIndex1 = random.nextInt(bound)+1;
+        randomIndex1 = random.nextInt(bound) + 1;
         randomIndex2 = random.nextInt(bound * 2 - min) + min;
         min = bound * 2;
         randomIndex3 = random.nextInt(bound * 3 - min) + min;
         min = bound * 3;
-        randomIndex4 = random.nextInt(bound * 4 - min) + min-1;
+        randomIndex4 = random.nextInt(bound * 4 - min) + min - 1;
 
         for (int i = 0; i <= randomIndex1; i++)
             neighbour.addIndexCities(current.get(i));

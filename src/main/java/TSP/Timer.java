@@ -1,6 +1,7 @@
 package TSP;
 
 public class Timer {
+    public static final long ENDTIME = 180000;
     private long start, stop;
 
     public void startTimer(){
