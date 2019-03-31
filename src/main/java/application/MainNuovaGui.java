@@ -39,20 +39,22 @@ public class MainNuovaGui {
         long seed;
         String path = "/home/test/Scrivania/progetto/results/";
         Result result;
+        int count = 1;
         while (true) {
-//            for (int i = 0; i < filesName.length; i++) {
-                inputFile = chooseResource("fl1577.tsp");
+            for (int i = 0; i < filesName.length; i++) {
+                inputFile = chooseResource(filesName[i]);
                 seed = System.currentTimeMillis();
                 result = computeAlgorithms(seed, inputFile);
                 try {
-                    if (checkResults((path+"fl1577.tsp"), result)) {
-                        printFile(result, (path+"fl1577.tsp"));
+                    if (checkResults((path+filesName[i]), result)) {
+                        printFile(result, (path+filesName[i]));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-//            }
+                System.out.println("File " + filesName[i] + " analised " + count + " times");
+            }
+            count++;
         }
 
     }

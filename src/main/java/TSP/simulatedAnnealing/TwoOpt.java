@@ -34,7 +34,6 @@ public class TwoOpt {
                 tour = swapArcs(bestI, bestJ, size);
 
         }
-        Timer.stopTimer();
         tour.setTotalDistance(tour.computeTotalDistance());
         return tour;
     }

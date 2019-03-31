@@ -19,6 +19,7 @@ public class SimulatedAnnealing {
 
     public SimulatedAnnealing(long seed) {
         this.random = new Random(seed);
+        this.temperature = Timer.ENDTIME;
     }
 
     public Tour computeAlgorithm(Tour tour) {
@@ -39,7 +40,7 @@ public class SimulatedAnnealing {
             } else if (random.nextDouble() < acceptNeighbour(currentTour.getTotalDistance(), candidateTour.getTotalDistance())) {
                 currentTour = new Tour(candidateTour);
             }
-
+            temperature -= Timer.getElapsedTime();
         }
         Timer.stopTimer();
         return bestTour;
