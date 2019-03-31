@@ -37,7 +37,7 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
-        String path = "/home/test/Scrivania/progetto/results/";
+        String path = "/home/test/Scrivania/progetto/results2/";
         Result result;
         int count = 1;
         while (true) {
@@ -48,6 +48,7 @@ public class MainNuovaGui {
                 try {
                     if (checkResults((path+filesName[i]), result)) {
                         printFile(result, (path+filesName[i]));
+                        System.err.println("File " + filesName[i] + " improved!");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
