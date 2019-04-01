@@ -37,18 +37,20 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
-        String path = "/home/test/Scrivania/progetto/results/";
+        String path = "/home/test/Dropbox/TSP/TSP_FinalResults/results1/";
         Result result;
         int count = 1;
         while (true) {
             for (int i = 0; i < filesName.length; i++) {
                 inputFile = chooseResource(filesName[i]);
                 seed = System.currentTimeMillis();
-                result = computeAlgorithms(seed, inputFile);
                 try {
+                if (!alreadyBest(filesName[i])) {
+                    result = computeAlgorithms(seed, inputFile);
                     if (checkResults((path+filesName[i]), result)) {
                         printFile(result, (path+filesName[i]));
                     }
+                }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -57,6 +59,14 @@ public class MainNuovaGui {
             count++;
         }
 
+    }
+
+    private static boolean alreadyBest(String fileName) throws FileNotFoundException {
+        FileReader fileReader = new FileReader((fileName + ".txt"));
+        Result oldResult = fileReader.readFileResult();
+        if (oldResult.getError() == 0.0)
+            return true;
+        return false;
     }
 
     private static void printFile(Result result, String fileName) throws FileNotFoundException {
@@ -70,8 +80,10 @@ public class MainNuovaGui {
     private static boolean checkResults(String fileName, Result result) throws FileNotFoundException {
         FileReader fileReader = new FileReader((fileName+".txt"));
         Result oldResult = fileReader.readFileResult();
-        if (result.getError() < oldResult.getError())
+        if (result.getError() < oldResult.getError()){
+            System.err.println("File " + fileName + " improved from " + oldResult.getError() + " to " + result.getError() + " !");
             return true;
+        }
 
         return false;
 

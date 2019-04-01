@@ -40,7 +40,7 @@ public class SimulatedAnnealing {
             } else if (random.nextDouble() < acceptNeighbour(currentTour.getTotalDistance(), candidateTour.getTotalDistance())) {
                 currentTour = new Tour(candidateTour);
             }
-            temperature -= Timer.getElapsedTime();
+            temperature = Timer.ENDTIME - Timer.getElapsedTime();
         }
         Timer.stopTimer();
         return bestTour;
