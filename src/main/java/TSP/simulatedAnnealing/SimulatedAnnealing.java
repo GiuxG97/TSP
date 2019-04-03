@@ -49,7 +49,6 @@ public class SimulatedAnnealing {
 
             temperature *= coolingRate;
         }
-        System.out.println("temp: " + temperature);
         Timer.stopTimer();
         return bestTour;
     }
