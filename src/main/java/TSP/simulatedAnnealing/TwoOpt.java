@@ -14,9 +14,9 @@ public class TwoOpt {
     public Tour computeAlgorithm(Tour initialTour) {
         tour = new Tour(initialTour);
         int size = tour.size();
-        int bestGain = -1;
-        int gain;
-        int bestI = 0, bestJ = 0;
+//        int bestGain = -1;
+//        int gain;
+//        int bestI = 0, bestJ = 0;
         int[][] distanceMatrix = TourManager.getDistanceMatrix();
         boolean isImproved = true;
         while (isImproved && Timer.getElapsedTime() < Timer.ENDTIME){

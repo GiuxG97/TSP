@@ -88,7 +88,7 @@ public class SimulatedAnnealing {
     }
 
     //compute neighbor
-//    private Tour computeNeighbor(Tour current, Random random) {
+//    private Tour computeNeighbor(Tour current) {
 //        int randomIndex1, randomIndex2, randomIndex3, randomIndex4;
 //        Tour neighbour = new Tour();
 //        int bound = TourManager.numberOfCities() / 4;

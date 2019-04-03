@@ -37,17 +37,54 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
+        String path = "/home/test/Dropbox/TSP/TSP_FinalResults/results/";
         Result result;
-//        for (int i = 0; i < filesName.length; i++) {
-            inputFile = chooseResource(filesName[8]);
-//            seed = System.currentTimeMillis();
-            seed = 1554302074935l;
-            result = computeAlgorithms(seed, inputFile);
-//        }
-        System.out.println("Time: " + result.getTime());
-        System.out.println("Error: " + result.getError());
-        tour.print();
-        print();
+        int count = 1;
+        while (true) {
+            for (int i = 0; i < filesName.length; i++) {
+                inputFile = chooseResource(filesName[i]);
+                seed = System.currentTimeMillis();
+                try {
+                    if (!alreadyBest(filesName[i])) {
+                        result = computeAlgorithms(seed, inputFile);
+                        if (checkResults((path+filesName[i]), result)) {
+                            printFile(result, (path+filesName[i]));
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("File " + filesName[i] + " analised " + count + " times");
+            }
+            count++;
+        }
+
+    }
+
+    private static boolean alreadyBest(String fileName) throws FileNotFoundException {
+        FileReader fileReader = new FileReader((fileName + ".txt"));
+        Result oldResult = fileReader.readFileResult();
+        if (oldResult.getError() == 0.0)
+            return true;
+        return false;
+    }
+
+    private static void printFile(Result result, String fileName) throws FileNotFoundException {
+        PrintWriter writer = new PrintWriter(new FileOutputStream(fileName + ".txt", false));
+        writer.println(result.getError());
+        writer.println(result.getSeed());
+        writer.println(result.getTime());
+        writer.close();
+    }
+
+    private static boolean checkResults(String fileName, Result result) throws FileNotFoundException {
+        FileReader fileReader = new FileReader((fileName+".txt"));
+        Result oldResult = fileReader.readFileResult();
+        if (result.getError() < oldResult.getError()){
+            System.err.println("File " + fileName + " improved from " + oldResult.getError() + " to " + result.getError() + " !");
+            return true;
+        }
+        return false;
 
     }
 
