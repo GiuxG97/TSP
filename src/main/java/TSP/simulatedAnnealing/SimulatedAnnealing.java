@@ -46,7 +46,6 @@ public class SimulatedAnnealing {
                     currentTour = new Tour(candidateTour);
                 }
             }
-            temperature = Timer.ENDTIME - Timer.getElapsedTime();
 
             temperature *= coolingRate;
         }
