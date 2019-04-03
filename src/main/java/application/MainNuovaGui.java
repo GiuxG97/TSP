@@ -110,7 +110,7 @@ public class MainNuovaGui {
 
 //        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
 //        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99, seed);
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed, 0.97);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         tour = tourSimulatedAnnealing;
 
