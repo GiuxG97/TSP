@@ -37,43 +37,17 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
-        String path = "/home/test/Scrivania/progetto/results/";
         Result result;
-        int count = 1;
-        while (true) {
-            for (int i = 0; i < filesName.length; i++) {
-                inputFile = chooseResource(filesName[i]);
-                seed = System.currentTimeMillis();
-                result = computeAlgorithms(seed, inputFile);
-                try {
-                    if (checkResults((path+filesName[i]), result)) {
-                        printFile(result, (path+filesName[i]));
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("File " + filesName[i] + " analised " + count + " times");
-            }
-            count++;
-        }
-
-    }
-
-    private static void printFile(Result result, String fileName) throws FileNotFoundException {
-        PrintWriter writer = new PrintWriter(new FileOutputStream(fileName + ".txt", false));
-        writer.println(result.getError());
-        writer.println(result.getSeed());
-        writer.println(result.getTime());
-        writer.close();
-    }
-
-    private static boolean checkResults(String fileName, Result result) throws FileNotFoundException {
-        FileReader fileReader = new FileReader((fileName+".txt"));
-        Result oldResult = fileReader.readFileResult();
-        if (result.getError() < oldResult.getError())
-            return true;
-
-        return false;
+//        for (int i = 0; i < filesName.length; i++) {
+            inputFile = chooseResource(filesName[8]);
+//            seed = System.currentTimeMillis();
+            seed = 1554302074935l;
+            result = computeAlgorithms(seed, inputFile);
+//        }
+        System.out.println("Time: " + result.getTime());
+        System.out.println("Error: " + result.getError());
+        tour.print();
+        print();
 
     }
 
@@ -99,7 +73,7 @@ public class MainNuovaGui {
 
 //        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
 //        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99, seed);
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed, 0.97);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         tour = tourSimulatedAnnealing;
 
