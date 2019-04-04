@@ -37,7 +37,7 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
-        String path = "/home/test/Dropbox/TSP/TSP_FinalResults/results2/";
+        String path = "C:\\Users\\Windows10\\Dropbox\\TSP\\TSP_FinalResults\\results\\";
         Result result;
         int count = 1;
         while (true) {
@@ -45,16 +45,16 @@ public class MainNuovaGui {
                 inputFile = chooseResource(filesName[i]);
                 seed = System.currentTimeMillis();
                 try {
-                    if (!alreadyBest(filesName[i])) {
+                    if (!alreadyBest((path+filesName[i]))) {
                         result = computeAlgorithms(seed, inputFile);
                         if (checkResults((path+filesName[i]), result)) {
                             printFile(result, (path+filesName[i]));
                         }
+                        System.out.println("File " + filesName[i] + " analised " + count + " times");
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println("File " + filesName[i] + " analised " + count + " times");
             }
             count++;
         }
@@ -110,7 +110,7 @@ public class MainNuovaGui {
 
 //        //1000 e 0.99 vanno bene per fl1577, ma sforo di qualche secondo
 //        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(1000, 0.99, seed);
-        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed, 0.97);
+        SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(seed, 0.95);
         Tour tourSimulatedAnnealing = simulatedAnnealing.computeAlgorithm(tourTwoOpt);
         tour = tourSimulatedAnnealing;
 
