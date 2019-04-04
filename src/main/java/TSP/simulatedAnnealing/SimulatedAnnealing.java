@@ -57,6 +57,7 @@ public class SimulatedAnnealing {
     private Tour computeNeighbor(Tour current){
         List<Integer> randomIndexes = new ArrayList<>();
         Tour neighbour = new Tour();
+        //create 4 different random index that are sorted from the smallest to the bigger
         int rIndex;
         int size = TourManager.numberOfCities();
         for (int i=0; i<5; i++){

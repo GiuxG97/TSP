@@ -37,7 +37,7 @@ public class MainNuovaGui {
         InputStream inputFile;
         String[] filesName = {"eil76.tsp", "kroA100.tsp", "ch130.tsp", "d198.tsp", "lin318.tsp", "pr439.tsp", "pcb442.tsp", "rat783.tsp", "u1060.tsp", "fl1577.tsp"};
         long seed;
-        String path = "/home/test/Dropbox/TSP/TSP_FinalResults/results1/";
+        String path = "/home/test/Dropbox/TSP/TSP_FinalResults/results2/";
         Result result;
         int count = 1;
         while (true) {
