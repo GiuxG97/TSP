@@ -51,12 +51,12 @@ public class MainNuovaGui {
                             printFile(result, (path+filesName[i]));
                         }
                         System.out.println("File " + filesName[i] + " analised " + count + " times");
+                        count++;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            count++;
         }
 
     }
